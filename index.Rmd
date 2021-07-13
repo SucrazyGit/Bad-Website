@@ -6,9 +6,8 @@ output: html_document
 ---
 
 # My Information
-Name: Brandon Sucrese
-From: Colorado Springs, Co
-Interest: Video Games
-Work: Peek
-School: University of Utah
-Shiny App: Work in Progress
+## Name: Brandon Sucrese
+## From: Colorado Springs, Co
+## Interest: Video Games
+## School: University of Utah
+## Shiny App: Work in Progress
