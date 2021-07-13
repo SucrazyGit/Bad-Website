@@ -271,12 +271,12 @@ $(document).ready(function () {
 <p>Code Summary: Reads in necessary libraries.</p>
 <pre class="r"><code>library(naniar)
 library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+<pre><code>## ── Attaching packages ──────────────────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
 <pre><code>## ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
 ## ✓ tibble  3.1.1     ✓ dplyr   1.0.6
 ## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
 ## ✓ readr   1.4.0     ✓ forcats 0.5.1</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>## ── Conflicts ─────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(mice)</code></pre>
@@ -305,7 +305,7 @@ library(agricolae)</code></pre>
 <p>Code Summary: Reads in the beer and breweries data sets. Sets the variables to the correct type and summaries the two data sets.</p>
 <pre class="r"><code>beer = read_csv(&quot;https://raw.githubusercontent.com/BivinSadler/MSDS_6306_Doing-Data-Science/Master/Unit%208%20and%209%20Case%20Study%201/Beers.csv&quot;) </code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
+## ── Column specification ─────────────────────────────────────────────────────────────────────
 ## cols(
 ##   Name = col_character(),
 ##   Beer_ID = col_double(),
@@ -318,21 +318,21 @@ library(agricolae)</code></pre>
 <pre class="r"><code>breweries = read.csv(&quot;https://raw.githubusercontent.com/BivinSadler/MSDS_6306_Doing-Data-Science/Master/Unit%208%20and%209%20Case%20Study%201/Breweries.csv&quot;)
 breweries$State = as.factor(breweries$State)  ## Sets the state variable to a factor
 summary(beer) ## Summarizes the beer data set</code></pre>
-<pre><code>##      Name              Beer_ID            ABV               IBU        
-##  Length:2410        Min.   :   1.0   Min.   :0.00100   Min.   :  4.00  
-##  Class :character   1st Qu.: 808.2   1st Qu.:0.05000   1st Qu.: 21.00  
-##  Mode  :character   Median :1453.5   Median :0.05600   Median : 35.00  
-##                     Mean   :1431.1   Mean   :0.05977   Mean   : 42.71  
-##                     3rd Qu.:2075.8   3rd Qu.:0.06700   3rd Qu.: 64.00  
-##                     Max.   :2692.0   Max.   :0.12800   Max.   :138.00  
-##                                      NA&#39;s   :62        NA&#39;s   :1005    
-##    Brewery_id       Style               Ounces     
-##  Min.   :  1.0   Length:2410        Min.   : 8.40  
-##  1st Qu.: 94.0   Class :character   1st Qu.:12.00  
-##  Median :206.0   Mode  :character   Median :12.00  
-##  Mean   :232.7                      Mean   :13.59  
-##  3rd Qu.:367.0                      3rd Qu.:16.00  
-##  Max.   :558.0                      Max.   :32.00  
+<pre><code>##      Name              Beer_ID            ABV               IBU           Brewery_id   
+##  Length:2410        Min.   :   1.0   Min.   :0.00100   Min.   :  4.00   Min.   :  1.0  
+##  Class :character   1st Qu.: 808.2   1st Qu.:0.05000   1st Qu.: 21.00   1st Qu.: 94.0  
+##  Mode  :character   Median :1453.5   Median :0.05600   Median : 35.00   Median :206.0  
+##                     Mean   :1431.1   Mean   :0.05977   Mean   : 42.71   Mean   :232.7  
+##                     3rd Qu.:2075.8   3rd Qu.:0.06700   3rd Qu.: 64.00   3rd Qu.:367.0  
+##                     Max.   :2692.0   Max.   :0.12800   Max.   :138.00   Max.   :558.0  
+##                                      NA&#39;s   :62        NA&#39;s   :1005                    
+##     Style               Ounces     
+##  Length:2410        Min.   : 8.40  
+##  Class :character   1st Qu.:12.00  
+##  Mode  :character   Median :12.00  
+##                     Mean   :13.59  
+##                     3rd Qu.:16.00  
+##                     Max.   :32.00  
 ## </code></pre>
 <pre class="r"><code>summary(breweries) ## Summarizes the breweries data set</code></pre>
 <pre><code>##     Brew_ID          Name               City               State    
@@ -356,73 +356,51 @@ colnames(beer_comp)[which(names(beer_comp) == &quot;Brewery_id&quot;)] &lt;- &qu
 gg_miss_var(imp_beer_comp)  ## Graphs missing values by variable</code></pre>
 <p><img src="Case-Study-Code---R-Markdown_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <pre class="r"><code>head(imp_beer_comp, n=10)  ## Displays first 10 observations</code></pre>
-<pre><code>##    Brewery_ID      Beer_Name Beer_ID   ABV IBU
-## 1           1   Get Together    2692 0.045  50
-## 2           1  Maggie&#39;s Leap    2691 0.049  26
-## 3           1     Wall&#39;s End    2690 0.048  19
-## 4           1        Pumpion    2689 0.060  38
-## 5           1     Stronghold    2688 0.060  25
-## 6           1    Parapet ESB    2687 0.056  47
-## 7           2 Citra Ass Down    2686 0.080  68
-## 8           2 London Balling    2685 0.125  80
-## 9           2           35 K    2684 0.077  25
-## 10          2         A Beer    2683 0.042  42
-##                                  Style Ounces              Brewery_Name
-## 1                         American IPA     16        NorthGate Brewing 
-## 2                   Milk / Sweet Stout     16        NorthGate Brewing 
-## 3                    English Brown Ale     16        NorthGate Brewing 
-## 4                          Pumpkin Ale     16        NorthGate Brewing 
-## 5                      American Porter     16        NorthGate Brewing 
-## 6  Extra Special / Strong Bitter (ESB)     16        NorthGate Brewing 
-## 7       American Double / Imperial IPA     16 Against the Grain Brewery
-## 8                   English Barleywine     16 Against the Grain Brewery
-## 9                   Milk / Sweet Stout     16 Against the Grain Brewery
-## 10             American Pale Ale (APA)     16 Against the Grain Brewery
-##           City State
-## 1  Minneapolis    MN
-## 2  Minneapolis    MN
-## 3  Minneapolis    MN
-## 4  Minneapolis    MN
-## 5  Minneapolis    MN
-## 6  Minneapolis    MN
-## 7   Louisville    KY
-## 8   Louisville    KY
-## 9   Louisville    KY
-## 10  Louisville    KY</code></pre>
+<pre><code>##    Brewery_ID      Beer_Name Beer_ID   ABV IBU                               Style Ounces
+## 1           1   Get Together    2692 0.045  50                        American IPA     16
+## 2           1  Maggie&#39;s Leap    2691 0.049  26                  Milk / Sweet Stout     16
+## 3           1     Wall&#39;s End    2690 0.048  19                   English Brown Ale     16
+## 4           1        Pumpion    2689 0.060  38                         Pumpkin Ale     16
+## 5           1     Stronghold    2688 0.060  25                     American Porter     16
+## 6           1    Parapet ESB    2687 0.056  47 Extra Special / Strong Bitter (ESB)     16
+## 7           2 Citra Ass Down    2686 0.080  68      American Double / Imperial IPA     16
+## 8           2 London Balling    2685 0.125  80                  English Barleywine     16
+## 9           2           35 K    2684 0.077  25                  Milk / Sweet Stout     16
+## 10          2         A Beer    2683 0.042  42             American Pale Ale (APA)     16
+##                 Brewery_Name        City State
+## 1         NorthGate Brewing  Minneapolis    MN
+## 2         NorthGate Brewing  Minneapolis    MN
+## 3         NorthGate Brewing  Minneapolis    MN
+## 4         NorthGate Brewing  Minneapolis    MN
+## 5         NorthGate Brewing  Minneapolis    MN
+## 6         NorthGate Brewing  Minneapolis    MN
+## 7  Against the Grain Brewery  Louisville    KY
+## 8  Against the Grain Brewery  Louisville    KY
+## 9  Against the Grain Brewery  Louisville    KY
+## 10 Against the Grain Brewery  Louisville    KY</code></pre>
 <pre class="r"><code>tail(imp_beer_comp, n=10)  ## Displays last 10 observations</code></pre>
-<pre><code>##      Brewery_ID                    Beer_Name Beer_ID   ABV IBU
-## 2401        552                 Ice Pick Ale     160 0.068  NA
-## 2402        553      Mickey Finn&#39;s Amber Ale     174 0.056  NA
-## 2403        554           Heiner Brau Kölsch     129 0.050  NA
-## 2404        555 BrewFarm Select Golden Lager     110 0.055  NA
-## 2405        556                Pilsner Ukiah      98 0.055  NA
-## 2406        557     Heinnieweisse Weissebier      52 0.049  NA
-## 2407        557              Snapperhead IPA      51 0.068  NA
-## 2408        557            Moo Thunder Stout      50 0.049  NA
-## 2409        557            Porkslap Pale Ale      49 0.043  NA
-## 2410        558    Urban Wilderness Pale Ale      30 0.049  NA
-##                         Style Ounces                  Brewery_Name
-## 2401             American IPA     12             Silverton Brewery
-## 2402 American Amber / Red Ale     12         Mickey Finn&#39;s Brewery
-## 2403                   Kölsch     12           Covington Brewhouse
-## 2404      American Pale Lager     12               Dave&#39;s Brewfarm
-## 2405          German Pilsener     12         Ukiah Brewing Company
-## 2406               Hefeweizen     12       Butternuts Beer and Ale
-## 2407             American IPA     12       Butternuts Beer and Ale
-## 2408       Milk / Sweet Stout     12       Butternuts Beer and Ale
-## 2409  American Pale Ale (APA)     12       Butternuts Beer and Ale
-## 2410         English Pale Ale     12 Sleeping Lady Brewing Company
-##               City State
-## 2401     Silverton    CO
-## 2402  Libertyville    IL
-## 2403     Covington    LA
-## 2404        Wilson    WI
-## 2405         Ukiah    CA
-## 2406 Garrattsville    NY
-## 2407 Garrattsville    NY
-## 2408 Garrattsville    NY
-## 2409 Garrattsville    NY
-## 2410     Anchorage    AK</code></pre>
+<pre><code>##      Brewery_ID                    Beer_Name Beer_ID   ABV IBU                    Style
+## 2401        552                 Ice Pick Ale     160 0.068  NA             American IPA
+## 2402        553      Mickey Finn&#39;s Amber Ale     174 0.056  NA American Amber / Red Ale
+## 2403        554           Heiner Brau Kölsch     129 0.050  NA                   Kölsch
+## 2404        555 BrewFarm Select Golden Lager     110 0.055  NA      American Pale Lager
+## 2405        556                Pilsner Ukiah      98 0.055  NA          German Pilsener
+## 2406        557     Heinnieweisse Weissebier      52 0.049  NA               Hefeweizen
+## 2407        557              Snapperhead IPA      51 0.068  NA             American IPA
+## 2408        557            Moo Thunder Stout      50 0.049  NA       Milk / Sweet Stout
+## 2409        557            Porkslap Pale Ale      49 0.043  NA  American Pale Ale (APA)
+## 2410        558    Urban Wilderness Pale Ale      30 0.049  NA         English Pale Ale
+##      Ounces                  Brewery_Name          City State
+## 2401     12             Silverton Brewery     Silverton    CO
+## 2402     12         Mickey Finn&#39;s Brewery  Libertyville    IL
+## 2403     12           Covington Brewhouse     Covington    LA
+## 2404     12               Dave&#39;s Brewfarm        Wilson    WI
+## 2405     12         Ukiah Brewing Company         Ukiah    CA
+## 2406     12       Butternuts Beer and Ale Garrattsville    NY
+## 2407     12       Butternuts Beer and Ale Garrattsville    NY
+## 2408     12       Butternuts Beer and Ale Garrattsville    NY
+## 2409     12       Butternuts Beer and Ale Garrattsville    NY
+## 2410     12 Sleeping Lady Brewing Company     Anchorage    AK</code></pre>
 <p>Code Summary: Creates a new data set of Median ABV by state. Graphs and summarize this data set.</p>
 <pre class="r"><code>State_ABV = imp_beer_comp %&gt;% filter(!is.na(imp_beer_comp$ABV))  ## Filters out any rows with missing values for ABV
 
@@ -447,32 +425,28 @@ State_ABV[b,]</code></pre>
 <p>Code Summary: Finds and displays the beer with highest ABV and IBU values. Also finds and displays the beer with the lowest ABV and IBU values.</p>
 <pre class="r"><code>c = which.max(imp_beer_comp$ABV)  ## Finds and displays beer with the highest ABV value
 imp_beer_comp[c,]</code></pre>
-<pre><code>##     Brewery_ID                                            Beer_Name Beer_ID
-## 375         52 Lee Hill Series Vol. 5 - Belgian Style Quadrupel Ale    2565
-##       ABV IBU            Style Ounces            Brewery_Name    City State
-## 375 0.128  NA Quadrupel (Quad)   19.2 Upslope Brewing Company Boulder    CO</code></pre>
+<pre><code>##     Brewery_ID                                            Beer_Name Beer_ID   ABV IBU
+## 375         52 Lee Hill Series Vol. 5 - Belgian Style Quadrupel Ale    2565 0.128  NA
+##                Style Ounces            Brewery_Name    City State
+## 375 Quadrupel (Quad)   19.2 Upslope Brewing Company Boulder    CO</code></pre>
 <pre class="r"><code>d = which.max(imp_beer_comp$IBU)  ## Finds and displays beer with the highest IBU value
 imp_beer_comp[d,]</code></pre>
-<pre><code>##      Brewery_ID                 Beer_Name Beer_ID   ABV IBU
-## 1857        375 Bitter Bitch Imperial IPA     980 0.082 138
-##                               Style Ounces            Brewery_Name    City
-## 1857 American Double / Imperial IPA     12 Astoria Brewing Company Astoria
-##      State
-## 1857    OR</code></pre>
+<pre><code>##      Brewery_ID                 Beer_Name Beer_ID   ABV IBU                          Style
+## 1857        375 Bitter Bitch Imperial IPA     980 0.082 138 American Double / Imperial IPA
+##      Ounces            Brewery_Name    City State
+## 1857     12 Astoria Brewing Company Astoria    OR</code></pre>
 <pre class="r"><code>e = which.min(imp_beer_comp$ABV)  ## Finds and displays beer with the lowest ABV value
 imp_beer_comp[c,]</code></pre>
-<pre><code>##     Brewery_ID                                            Beer_Name Beer_ID
-## 375         52 Lee Hill Series Vol. 5 - Belgian Style Quadrupel Ale    2565
-##       ABV IBU            Style Ounces            Brewery_Name    City State
-## 375 0.128  NA Quadrupel (Quad)   19.2 Upslope Brewing Company Boulder    CO</code></pre>
+<pre><code>##     Brewery_ID                                            Beer_Name Beer_ID   ABV IBU
+## 375         52 Lee Hill Series Vol. 5 - Belgian Style Quadrupel Ale    2565 0.128  NA
+##                Style Ounces            Brewery_Name    City State
+## 375 Quadrupel (Quad)   19.2 Upslope Brewing Company Boulder    CO</code></pre>
 <pre class="r"><code>f = which.min(imp_beer_comp$IBU)  ## Finds and displays beer with the lowest IBU value
 imp_beer_comp[d,]</code></pre>
-<pre><code>##      Brewery_ID                 Beer_Name Beer_ID   ABV IBU
-## 1857        375 Bitter Bitch Imperial IPA     980 0.082 138
-##                               Style Ounces            Brewery_Name    City
-## 1857 American Double / Imperial IPA     12 Astoria Brewing Company Astoria
-##      State
-## 1857    OR</code></pre>
+<pre><code>##      Brewery_ID                 Beer_Name Beer_ID   ABV IBU                          Style
+## 1857        375 Bitter Bitch Imperial IPA     980 0.082 138 American Double / Imperial IPA
+##      Ounces            Brewery_Name    City State
+## 1857     12 Astoria Brewing Company Astoria    OR</code></pre>
 <p>Code Summary: Summarizes the ABV value and plots ABV distribution by state.</p>
 <pre class="r"><code>summary(imp_beer_comp$ABV)  ## Summarizes ABV data</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
