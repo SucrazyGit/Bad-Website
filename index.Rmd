@@ -5,8 +5,10 @@ date: "7/12/2021"
 output: html_document
 ---
 
-# Simple Website
-## Note: Greetings
-Thank you for visiting!
-
-bv
+# My Information
+Name: Brandon Sucrese
+From: Colorado Springs, Co
+Interest: Video Games
+Work: Peek
+School: University of Utah
+Shiny App: Work in Progress
