@@ -5,4 +5,4 @@ navbar:
     - text: "About Me"
       href: index.html
     - text: "Beer Study"
-      href: Case Study Code - R Markdown.html
+      href: beerstudy.html
