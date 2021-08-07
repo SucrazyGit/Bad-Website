@@ -1,2 +1,1 @@
-# RSucrazy.github.io
-Website
+Bad Website
